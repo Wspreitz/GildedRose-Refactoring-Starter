@@ -9,29 +9,19 @@ class GildedRose(object):
         for item in self.items:
             if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" and item.name != "Sulfuras, Hand of Ragnaros":
                 if item.quality > 0:
-                     item.quality = item.quality - 1
-                else:
-                    item.quality = item.quality - item.quality #firgure out what this is for
+                    item.quality = item.quality - 1
             else:
                 if item.quality < 50:
                     item.quality = item.quality + 1
-                    if item.name == "Backstage passes to a TAFKAL80ETC concert":
-                        if item.sell_in < 11:
-                            item.quality += 1
-                        if item.sell_in < 6:
-                            item,quility += 1
-                        if item.sell_in < 1:
+                if item.name == "Backstage passes to a TAFKAL80ETC concert":
+                    if item.sell_in < 11 and item.sell_in > 5:
+                        item.quality += 1
+                    if item.sell_in < 6 and item.sell_in > 0:
+                        item.quality += 2
+                    if item.sell_in < 1:
                             item.quality = 0
-            if item.name != "Sulfuras, Hand of Ragnaros":
-                item.sell_in = item.sell_in - 1
-            if item.sell_in < 0:
-                    if item.quality < 50:
-                        item.quality = item.quality + 1
-
-"""
-There is still repition in this code
-"""
-
+                if item.name != "Sulfuras, Hand of Ragnaros":
+                    item.sell_in = item.sell_in - 1
 
 class Item:
     def __init__(self, name, sell_in, quality):
